@@ -17,7 +17,12 @@ export default class Cache {
 
   async update() {
     if (this.isRecent()) return;
-    const res: Response = await (await axios.get(API_URL)).data;
+
+    const res: Response = await (
+      await axios.get(API_URL).catch(() => {
+        throw new Error(`Connection to the API (${API_URL}) failed.`);
+      })
+    ).data;
 
     this.apis = res.entries;
     this.date = new Date();
