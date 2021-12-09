@@ -20,7 +20,7 @@
     "random"
   ],
   "author": "theyadev",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theyadev/random-api.git"
