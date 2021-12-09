@@ -1,5 +1,5 @@
 {
-  "name": "random-api",
+  "name": "get-random-api",
   "version": "1.0.0",
   "description": "A simple and lightweight module to get random apis",
    "main": "lib/index.js",
@@ -19,6 +19,10 @@
   "keywords": ["apis", "random"],
    "author": "theyadev",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theyadev/random-api.git"
+  },
   "files": [
     "lib/**/*"
   ],
