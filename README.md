@@ -1,4 +1,5 @@
 # get-random-api
+<a href="https://codeclimate.com/github/theyadev/random-api/maintainability"><img src="https://api.codeclimate.com/v1/badges/65bd89c7dad927f32a61/maintainability" /></a>
 
 A simple and lightweight module to get random api
 
