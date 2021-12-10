@@ -1,21 +1,25 @@
 import axios from 'axios';
-import { Entry, Response } from '../types/types';
+import { Category, Entry, Response } from '../types/types';
 
 const API_URL = 'https://api.publicapis.org/entries';
 
 export default class Cache {
+  count: number;
   apis: Entry[];
+  categories: Category[];
   date?: Date;
 
   constructor() {
+    this.count = 0;
     this.apis = [];
+    this.categories = [];
   }
 
   isRecent() {
     return this.date ? this.date >= new Date(new Date().getTime() - 10 * 60000) : false;
   }
 
-  async update() {
+  async fetchApis() {
     if (this.isRecent()) return;
 
     const res: Response = await (
@@ -25,6 +29,21 @@ export default class Cache {
     ).data;
 
     this.apis = res.entries;
+    this.count = res.count;
     this.date = new Date();
+  }
+
+  async fetchCategories() {
+    await this.fetchApis();
+
+    const categories: Category[] = [];
+
+    for (const api of this.apis) {
+      if (categories.includes(api.Category)) continue;
+
+      categories.push(api.Category);
+    }
+
+    this.categories = categories;
   }
 }
