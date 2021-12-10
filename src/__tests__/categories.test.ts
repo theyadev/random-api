@@ -1,4 +1,4 @@
-import { getAllCategories } from '../index';
+import { getAllCategories, getRandomCategory } from '../index';
 
 test('Categories', async () => {
   expect(await getAllCategories()).toStrictEqual([
@@ -54,4 +54,8 @@ test('Categories', async () => {
     'Video',
     'Weather',
   ]);
+});
+
+test('Categories Random', async () => {
+  expect((await getRandomCategory(5)).length).toBe(5);
 });
