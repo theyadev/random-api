@@ -1,29 +1,35 @@
 import Cache from './classes/cache';
 
+import getRandom from './utils/getRandom';
+
 const cache = new Cache();
 
 export async function getAllCategories() {
-  await cache.update();
+  await cache.fetchCategories();
 
-  const categories: string[] = [];
+  return cache.categories;
+}
 
-  for (const api of cache.apis) {
-    if (categories.includes(api.Category)) continue;
+export async function getRandomCategory(nb: number = 1) {
+  await cache.fetchCategories();
 
-    categories.push(api.Category);
-  }
+  return getRandom(cache.categories, nb);
+}
 
-  return categories;
+export async function getAllApis() {
+  await cache.fetchApis();
+
+  return cache.apis;
 }
 
 export async function getRandomApi(nb: number = 1) {
-  await cache.update();
+  await cache.fetchApis();
 
-  const randomSortedApis = cache.apis.sort(() => {
-    return Math.random() - 0.5;
-  });
+  return getRandom(cache.apis, nb);
+}
 
-  const randomApis = randomSortedApis.splice(0, nb);
+export async function getNumberOfApis() {
+  await cache.fetchApis();
 
-  return randomApis;
+  return cache.count;
 }
